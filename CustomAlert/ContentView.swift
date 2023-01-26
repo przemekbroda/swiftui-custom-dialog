@@ -8,19 +8,61 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showAlert1 = false
+    @State private var showAlert2 = false
+    @State private var show = true;
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack(spacing: 12) {
+                Button {
+                    showAlert1 = true
+                } label: {
+                    Text("Show alert 1")
+                }
+                .buttonStyle(.borderedProminent)
+                .alert("Alert 1", isPresented: $showAlert1) {
+                    
+                } message: {
+                    Text("message")
+                }
+
+                
+                Button {
+                    showAlert2 = true
+                } label: {
+                    Text("Show alert 2")
+                }
+                .buttonStyle(.bordered)
+                
+                Button {
+                    show.toggle()
+                } label: {
+                    Text("Show")
+                }
+                .buttonStyle(.bordered)
+                
+                if show {
+                    Text("Hello there")
+                        .transition(.scale)
+                }
+            }
+            .padding()
+            .navigationTitle("Home Page")
+            .showCustomDialog(isPresented: $showAlert2, title: "Title", message: "message")
         }
-        .padding()
+
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
+
     }
 }
