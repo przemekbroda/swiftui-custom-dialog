@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var showAlert1 = false
     @State private var showAlert2 = false
-    @State private var show = true;
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 12) {
@@ -34,21 +34,10 @@ struct ContentView: View {
                 }
                 .buttonStyle(.bordered)
                 
-                Button {
-                    show.toggle()
-                } label: {
-                    Text("Show")
-                }
-                .buttonStyle(.bordered)
-                
-                if show {
-                    Text("Hello there")
-                        .transition(.scale)
-                }
             }
             .padding()
-            .navigationTitle("Home Page")
-            .showCustomDialog(isPresented: $showAlert2, title: "Title", message: "message")
+            .navigationTitle("Custom Alert")
+            .showCustomAlert(isPresented: $showAlert2, title: "Title", message: "message")
         }
 
     }
@@ -60,9 +49,9 @@ struct ContentView_Previews: PreviewProvider {
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
 
-        ContentView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
-            .previewDisplayName("iPhone 14 Pro Max")
+//        ContentView()
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+//            .previewDisplayName("iPhone 14 Pro Max")
 
     }
 }
